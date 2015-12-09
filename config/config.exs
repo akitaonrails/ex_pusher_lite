@@ -27,3 +27,12 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :joken, config_module: Guardian.JWT
+
+config :guardian, Guardian,
+  issuer: "ExPusherLite",
+  ttl: { 30, :days },
+  verify_issuer: false,
+  serializer: ExPusherLite.GuardianSerializer,
+  atoms: [:listen, :publish, :crews, :email, :name, :id]

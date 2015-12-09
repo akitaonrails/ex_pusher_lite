@@ -1,17 +1,47 @@
 defmodule ExPusherLite.RoomChannel do
   use Phoenix.Channel
+  use Guardian.Channel
 
-  def join("test_chat_channel", _message, socket) do
+  # no auth is needed for public topics
+  def join("public:" <> _topic_id, _auth_msg, socket) do
     {:ok, socket}
   end
 
-  def handle_in("new_message", %{"name" => name, "message" => message}, socket) do
-    broadcast! socket, "new_message", %{name: name, message: message}
-    {:noreply, socket}
+  def join(topic, %{ claims: claims, resource: _resource }, socket) do
+    if permitted_topic?(claims[:listen], topic) do
+      { :ok, %{ message: "Joined" }, socket }
+    else
+      { :error, :authentication_required }
+    end
   end
 
-  def handle_out("new_message", payload, socket) do
-    push socket, "new_message", payload
-    {:noreply, socket}
+  def join(_room, _payload, _socket) do
+    { :error, :authentication_required }
+  end
+
+  def handle_in("msg", payload, socket = %{ topic: "public:" <> _ }) do
+    broadcast socket, "msg", payload
+    { :noreply, socket }
+  end
+
+  def handle_in("msg", payload, socket) do
+    claims = Guardian.Channel.claims(socket)
+    if permitted_topic?(claims[:publish], socket.topic) do
+      broadcast socket, "msg", payload
+      { :noreply, socket }
+    else
+      { :reply, :error, socket }
+    end
+  end
+
+  def permitted_topic?(nil, _), do: false
+  def permitted_topic?([], _), do: false
+
+  def permitted_topic?(permitted_topics, topic) do
+    matches = fn permitted_topic ->
+      pattern = String.replace(permitted_topic, ":*", ":.*")
+      Regex.match?(~r/\A#{pattern}\z/, topic)
+    end
+    Enum.any?(permitted_topics, matches)
   end
 end

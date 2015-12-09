@@ -17,7 +17,8 @@ defmodule ExPusherLite.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {ExPusherLite, []},
+    [env: [authentication: [secret: "14e86e5fee3335fa88b0:2b94ff0f07ce9769567f"]],
+     mod: {ExPusherLite, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
                     :phoenix_ecto, :postgrex]]
   end
@@ -35,7 +36,9 @@ defmodule ExPusherLite.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.1"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:joken, "~> 1.0.0"},
+     {:guardian, "~> 0.7.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
