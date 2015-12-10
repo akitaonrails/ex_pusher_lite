@@ -38,7 +38,9 @@ defmodule ExPusherLite.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
      {:joken, "~> 1.0.0"},
-     {:guardian, "~> 0.7.0"}]
+     {:guardian, "~> 0.7.0"},
+     {:secure_random, "~> 0.2.0"},
+     {:slugger, "~> 0.0.1"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
