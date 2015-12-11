@@ -2,7 +2,7 @@ defmodule ExPusherLite.AppController do
   use ExPusherLite.Web, :controller
 
   alias ExPusherLite.App
-
+  plug ExPusherLite.Authentication, [admin: true]
   plug :scrub_params, "app" when action in [:create, :update]
 
   def index(conn, _params) do

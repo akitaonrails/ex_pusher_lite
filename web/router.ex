@@ -22,7 +22,10 @@ defmodule ExPusherLite.Router do
   scope "/api", ExPusherLite do
     pipe_through :api
 
-    post "/events", EventsController, :create
-    resources "/apps", AppController, except: [:new, :edit]
+    post "/apps/:app_slug/events", EventsController, :create
+
+    scope "/admin" do
+      resources "/apps", AppController, except: [:new, :edit]
+    end
   end
 end

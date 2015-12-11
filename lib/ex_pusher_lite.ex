@@ -27,4 +27,12 @@ defmodule ExPusherLite do
     ExPusherLite.Endpoint.config_change(changed, removed)
     :ok
   end
+
+  # Return this applicaton administration Basic HTTP Auth hash
+  # FIXME: This is probably weak and we should implement Guardian JWT, but it will do for now
+  def admin_secret do
+    admin_username = Application.get_env(:ex_pusher_lite, :admin_authentication)[:username]
+    admin_password = Application.get_env(:ex_pusher_lite, :admin_authentication)[:password]
+    secret = Base.encode64("#{admin_username}:#{admin_password}")
+  end
 end

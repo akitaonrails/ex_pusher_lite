@@ -19,6 +19,10 @@ defmodule ExPusherLite.App do
     Repo.get_by!(__MODULE__, slug: slug, active: true)
   end
 
+  def hashed_secret(model) do
+    Base.encode64("#{model.key}:#{model.secret}")
+  end
+
   @doc """
   Creates a changeset based on the `model` and `params`.
 

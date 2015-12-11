@@ -1,24 +1,17 @@
 defmodule ExPusherLite.EventsController do
   use ExPusherLite.Web, :controller
 
-  plug :authenticate
+  plug ExPusherLite.Authentication
 
-  def create(conn, params) do
-    topic = params["topic"]
-    event = params["event"]
+  def create(conn, %{"app_slug" => app_slug, "event" => event, "topic" => topic, "scope" => scope} = params) do
     message = (params["payload"] || "{}") |> Poison.decode!
-    ExPusherLite.Endpoint.broadcast! topic, event, message
+    topic_event =
+      if topic == "#general" do
+        event
+      else
+        "#{topic}:#{event}"
+      end
+    ExPusherLite.Endpoint.broadcast! "#{scope}:#{app_slug}", topic_event, message
     json conn, %{}
   end
-
-  defp authenticate(conn, _) do
-    secret = Application.get_env(:ex_pusher_lite, :authentication)[:secret]
-    "Basic " <> auth_token = hd(get_req_header(conn, "authorization"))
-    if Plug.Crypto.secure_compare(auth_token, Base.encode64(secret)) do
-      conn
-    else
-      conn |> send_resp(401, "") |> halt
-    end
-  end
-
 end

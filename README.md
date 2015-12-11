@@ -1,19 +1,15 @@
-# ExPusherLite
+# Ex Pusher Lite - Server Side
 
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
   2. Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  3. Start Phoenix endpoint with `mix phoenix.server`
+  3. To create a 'test-app' do `mix run priv/repo/seeds.exs`
+  4. Start Phoenix endpoint with `mix phoenix.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-
+This will set up a simple test application ready to receive messages from the client Rails app.
 
 ## Learn more
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: http://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+  * Follow : http://www.akitaonrails.com/expusherlite
+  * Sample Client Demo : https://github.com/akitaonrails/pusher_lite_demo

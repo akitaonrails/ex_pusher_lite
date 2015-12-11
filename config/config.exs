@@ -19,10 +19,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
-
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
@@ -36,3 +32,11 @@ config :guardian, Guardian,
   verify_issuer: false,
   serializer: ExPusherLite.GuardianSerializer,
   atoms: [:listen, :publish, :crews, :email, :name, :id]
+
+config :ex_pusher_lite, :admin_authentication,
+  username: "pusher_admin_username",
+  password: "pusher_admin_password"
+
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+import_config "#{Mix.env}.exs"

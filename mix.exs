@@ -17,8 +17,7 @@ defmodule ExPusherLite.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [env: [authentication: [secret: "14e86e5fee3335fa88b0:2b94ff0f07ce9769567f"]],
-     mod: {ExPusherLite, []},
+    [mod: {ExPusherLite, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
                     :phoenix_ecto, :postgrex]]
   end
