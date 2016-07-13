@@ -6,7 +6,7 @@ defmodule ExPusherLite.AppControllerTest do
   @invalid_attrs %{ name: "abc" }
 
   setup do
-    conn = conn()
+    conn = build_conn()
       |> put_req_header("accept", "application/json")
       |> put_req_header("authorization", "Basic #{ExPusherLite.admin_secret}")
     {:ok, conn: conn}

@@ -13,19 +13,8 @@ use Mix.Config
 # which you typically run after static files are built.
 config :ex_pusher_lite, ExPusherLite.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: "expusherlite.herokuapp.com", port: 443], force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  cache_static_manifest: "priv/static/manifest.json",
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
-
-# Configure your database
-config :ex_pusher_lite, ExPusherLite.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL"),
-  pool_size: 20
-
-config :ex_pusher_lite, :admin_authentication,
-  username: System.get_env("PUSHER_ADMIN_USERNAME"),
-  password: System.get_env("PUSHER_ADMIN_PASSWORD")
+  url: [host: "example.com", port: 80],
+  cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -66,8 +55,11 @@ config :logger, level: :info
 #
 #     config :ex_pusher_lite, ExPusherLite.Endpoint, server: true
 #
+# You will also need to set the application root to `.` in order
+# for the new static assets to be served after a hot upgrade:
+#
+#     config :ex_pusher_lite, ExPusherLite.Endpoint, root: "."
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-# import_config "prod.secret.exs"
-# not needed in Heroku
+import_config "prod.secret.exs"

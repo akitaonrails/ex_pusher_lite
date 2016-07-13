@@ -22,7 +22,7 @@ defmodule ExPusherLite.Web do
 
       import Ecto
       import Ecto.Changeset
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query
     end
   end
 
@@ -32,9 +32,10 @@ defmodule ExPusherLite.Web do
 
       alias ExPusherLite.Repo
       import Ecto
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query
 
       import ExPusherLite.Router.Helpers
+      import ExPusherLite.Gettext
     end
   end
 
@@ -49,6 +50,8 @@ defmodule ExPusherLite.Web do
       use Phoenix.HTML
 
       import ExPusherLite.Router.Helpers
+      import ExPusherLite.ErrorHelpers
+      import ExPusherLite.Gettext
     end
   end
 
@@ -64,7 +67,8 @@ defmodule ExPusherLite.Web do
 
       alias ExPusherLite.Repo
       import Ecto
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query
+      import ExPusherLite.Gettext
     end
   end
 

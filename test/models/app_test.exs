@@ -19,7 +19,7 @@ defmodule ExPusherLite.AppTest do
   test "generates a proper slug" do
     changeset = App.changeset(%App{}, %{name: "123 hello $%^ world!"})
     app = Repo.insert!(changeset)
-    assert app.slug == "123-hello-world"
+    assert app.slug == "123-hello-dollar-world"
   end
 
   test "generates proper key and secrets" do
