@@ -14,4 +14,9 @@ alias ExPusherLite.App
 alias ExPusherLite.Repo
 
 # not using the App.changeset should just avoid all validations and generations
-Repo.insert! %App{ slug: "test-app", name: "Test App", key: "test-app-fake-key", secret: "test-app-fake-secret", active: true }
+Repo.insert! %App{
+  slug: "name-of-the-client-application",
+  name: "Some Description Name for the Client Application",
+  key: "secret-key-1234567890",
+  secret: "secret-0987654321",
+  active: true }

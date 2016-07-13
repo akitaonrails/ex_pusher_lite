@@ -1,9 +1,10 @@
 defmodule ExPusherLite.EventsController do
   use ExPusherLite.Web, :controller
+  use Guardian.Phoenix.Controller
 
   plug ExPusherLite.Authentication
 
-  def create(conn, %{"app_slug" => app_slug, "event" => event, "topic" => topic, "scope" => scope} = params) do
+  def create(conn, %{"app_slug" => app_slug, "event" => event, "topic" => topic, "scope" => scope} = params, _user, _claims) do
     message = (params["payload"] || "{}") |> Poison.decode!
     topic_event =
       if topic == "#general" do

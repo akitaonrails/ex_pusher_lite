@@ -1,14 +1,14 @@
 defmodule ExPusherLite.RoomChannel do
   use Phoenix.Channel
-  use Guardian.Channel
+  import Guardian.Phoenix.Socket
 
   # no auth is needed for public topics
   def join("public:" <> _topic_id, _auth_msg, socket) do
     {:ok, socket}
   end
 
-  def join(topic, %{ claims: claims, resource: _resource }, socket) do
-    if permitted_topic?(claims[:listen], topic) do
+  def join(topic, _resource, socket) do
+    if permitted_topic?(socket, :listen, topic) do
       { :ok, %{ message: "Joined" }, socket }
     else
       { :error, :authentication_required }
@@ -25,8 +25,7 @@ defmodule ExPusherLite.RoomChannel do
   end
 
   def handle_in(topic_event, payload, socket) do
-    claims = Guardian.Channel.claims(socket)
-    if permitted_topic?(claims[:publish], socket.topic) do
+    if permitted_topic?(socket, :publish, socket.topic) do
       broadcast socket, topic_event, payload
       { :noreply, socket }
     else
@@ -34,11 +33,10 @@ defmodule ExPusherLite.RoomChannel do
     end
   end
 
-  def permitted_topic?(nil, _), do: false
-  def permitted_topic?([], _), do: false
-
-  def permitted_topic?(permitted_topics, topic) do
-    matches = fn permitted_topic ->
+  def permitted_topic?(socket, claim_key, topic) do
+    claims           = Guardian.Phoenix.Socket.current_claims(socket)
+    permitted_topics = claims[claim_key]
+    matches          = fn permitted_topic ->
       pattern = String.replace(permitted_topic, ":*", ":.*")
       Regex.match?(~r/\A#{pattern}\z/, topic)
     end

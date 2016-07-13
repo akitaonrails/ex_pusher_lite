@@ -13,14 +13,19 @@ defmodule ExPusherLite.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :guardian do
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
+  end
+
   scope "/", ExPusherLite do
-    pipe_through :browser
+    pipe_through [ :browser, :guardian ]
 
     get "/", PageController, :index
   end
 
   scope "/api", ExPusherLite do
-    pipe_through :api
+    pipe_through [ :api, :guardian ]
 
     post "/apps/:app_slug/events", EventsController, :create
 
