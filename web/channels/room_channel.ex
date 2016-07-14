@@ -35,11 +35,10 @@ defmodule ExPusherLite.RoomChannel do
 
   def permitted_topic?(socket, claim_key, topic) do
     claims           = Guardian.Phoenix.Socket.current_claims(socket)
-    permitted_topics = claims[claim_key]
-    matches          = fn permitted_topic ->
+    permitted_topics = claims[claim_key] || []
+    Enum.any?(permitted_topics, fn permitted_topic ->
       pattern = String.replace(permitted_topic, ":*", ":.*")
       Regex.match?(~r/\A#{pattern}\z/, topic)
-    end
-    Enum.any?(permitted_topics, matches)
+    end)
   end
 end
