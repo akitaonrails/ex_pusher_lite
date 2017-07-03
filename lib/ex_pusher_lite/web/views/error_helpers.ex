@@ -32,9 +32,9 @@ defmodule ExPusherLite.Web.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(ExPusherLite.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(ExPusherLite.Web.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(ExPusherLite.Gettext, "errors", msg, opts)
+      Gettext.dgettext(ExPusherLite.Web.Gettext, "errors", msg, opts)
     end
   end
 end
