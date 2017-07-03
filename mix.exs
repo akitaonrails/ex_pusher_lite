@@ -37,10 +37,10 @@ defmodule ExPusherLite.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:joken, "~> 1.2.1"},
+     {:joken, "~> 1.5.0"},
      {:guardian, "~> 0.12.0"},
-     {:secure_random, "~> 0.3.0"},
-     {:slugger, "~> 0.1.0"},
+     {:secure_random, "~> 0.5.1"},
+     {:slugger, "~> 0.2.0"},
     ]
   end
 
