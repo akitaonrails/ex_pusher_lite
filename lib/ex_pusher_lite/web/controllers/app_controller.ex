@@ -3,8 +3,11 @@ defmodule ExPusherLite.Web.AppController do
 
   alias ExPusherLite.Models
   alias ExPusherLite.Models.App
+
   plug ExPusherLite.Authentication, [admin: true]
   plug :scrub_params, "app" when action in [:create, :update]
+
+  action_fallback ExPusherLite.Web.FallbackController
 
   def index(conn, _params) do
     apps = Models.list_apps
