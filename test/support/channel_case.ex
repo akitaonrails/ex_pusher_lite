@@ -1,4 +1,4 @@
-defmodule ExPusherLite.ChannelCase do
+defmodule ExPusherLite.Web.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -27,17 +27,15 @@ defmodule ExPusherLite.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint ExPusherLite.Endpoint
+      @endpoint ExPusherLite.Web.Endpoint
     end
   end
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(ExPusherLite.Repo)
-
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(ExPusherLite.Repo, {:shared, self()})
     end
-
     :ok
   end
 end

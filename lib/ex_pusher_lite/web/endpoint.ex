@@ -1,7 +1,7 @@
-defmodule ExPusherLite.Endpoint do
+defmodule ExPusherLite.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :ex_pusher_lite
 
-  socket "/socket", ExPusherLite.UserSocket
+  socket "/socket", ExPusherLite.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,5 +38,17 @@ defmodule ExPusherLite.Endpoint do
     key: "_ex_pusher_lite_key",
     signing_salt: "WdojWlWt"
 
-  plug ExPusherLite.Router
+  plug ExPusherLite.Web.Router
+
+  @doc """
+  Dynamically loads configuration from the system environment
+  on startup.
+
+  It receives the endpoint configuration from the config files
+  and must return the updated configuration.
+  """
+  def load_from_system_env(config) do
+    port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
+    {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+  end
 end

@@ -1,7 +1,7 @@
 defmodule ExPusherLite.AppTest do
   use ExPusherLite.ModelCase
 
-  alias ExPusherLite.App
+  alias ExPusherLite.Models.App
 
   @valid_attrs %{name: "some content"}
   @invalid_attrs %{name: "abc"}

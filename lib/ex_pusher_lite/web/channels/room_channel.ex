@@ -1,4 +1,4 @@
-defmodule ExPusherLite.RoomChannel do
+defmodule ExPusherLite.Web.RoomChannel do
   use Phoenix.Channel
   import Guardian.Phoenix.Socket
 

@@ -1,3 +1,3 @@
-defmodule ExPusherLite.LayoutViewTest do
-  use ExPusherLite.ConnCase, async: true
+defmodule ExPusherLite.Web.LayoutViewTest do
+  use ExPusherLite.Web.ConnCase, async: true
 end

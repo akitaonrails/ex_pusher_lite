@@ -28,20 +28,22 @@ defmodule ExPusherLite.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller
+      use Phoenix.Controller, namespace: ExPusherLite.Web
 
       alias ExPusherLite.Repo
       import Ecto
       import Ecto.Query
 
-      import ExPusherLite.Router.Helpers
-      import ExPusherLite.Gettext
+      import Plug.Conn
+      import ExPusherLite.Web.Router.Helpers
+      import ExPusherLite.Web.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
+      use Phoenix.View, root: "lib/ex_pusher_lite/web/templates",
+                        namespace: ExPusherLite.Web
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -49,15 +51,17 @@ defmodule ExPusherLite.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import ExPusherLite.Router.Helpers
-      import ExPusherLite.ErrorHelpers
-      import ExPusherLite.Gettext
+      import ExPusherLite.Web.Router.Helpers
+      import ExPusherLite.Web.ErrorHelpers
+      import ExPusherLite.Web.Gettext
     end
   end
 
   def router do
     quote do
       use Phoenix.Router
+      import Plug.Conn
+      import Phoenix.Controller
     end
   end
 
@@ -68,7 +72,7 @@ defmodule ExPusherLite.Web do
       alias ExPusherLite.Repo
       import Ecto
       import Ecto.Query
-      import ExPusherLite.Gettext
+      import ExPusherLite.Web.Gettext
     end
   end
 

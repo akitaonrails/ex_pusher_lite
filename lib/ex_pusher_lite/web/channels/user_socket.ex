@@ -1,8 +1,8 @@
-defmodule ExPusherLite.UserSocket do
+defmodule ExPusherLite.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "*", ExPusherLite.RoomChannel
+  channel "*", ExPusherLite.Web.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

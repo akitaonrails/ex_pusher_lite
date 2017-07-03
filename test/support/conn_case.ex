@@ -1,4 +1,4 @@
-defmodule ExPusherLite.ConnCase do
+defmodule ExPusherLite.Web.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -25,10 +25,10 @@ defmodule ExPusherLite.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import ExPusherLite.Router.Helpers
+      import ExPusherLite.Web.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint ExPusherLite.Endpoint
+      @endpoint ExPusherLite.Web.Endpoint
     end
   end
 

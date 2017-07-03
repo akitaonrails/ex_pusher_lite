@@ -1,5 +1,5 @@
-defmodule ExPusherLite.PageControllerTest do
-  use ExPusherLite.ConnCase
+defmodule ExPusherLite.Web.PageControllerTest do
+  use ExPusherLite.Web.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
