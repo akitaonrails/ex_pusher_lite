@@ -1,8 +1,8 @@
-defmodule ExPusherLite.RoomChannelTest do
-  use ExPusherLite.ChannelCase
+defmodule ExPusherLite.Web.RoomChannelTest do
+  use ExPusherLite.Web.ChannelCase
 
-  alias ExPusherLite.RoomChannel
-  alias ExPusherLite.App
+  alias ExPusherLite.Web.RoomChannel
+  alias ExPusherLite.Models.App
   alias ExPusherLite.Repo
 
   setup do
@@ -42,7 +42,7 @@ defmodule ExPusherLite.RoomChannelTest do
       |> subscribe_and_join(RoomChannel, "public:test-app", guardian_payload)
 
     message = %{"name" => "Fabio", "message" => "Hello World"}
-    ref = push socket, "msg", message
+    _ = push socket, "msg", message
     assert_broadcast "msg", message
   end
 
@@ -51,7 +51,7 @@ defmodule ExPusherLite.RoomChannelTest do
       |> subscribe_and_join(RoomChannel, "public:test-app", guardian_payload)
 
     message = %{"name" => "Fabio", "message" => "Hello World"}
-    ref = push socket, "mychannel:msg", message
+    _ = push socket, "mychannel:msg", message
     assert_broadcast "mychannel:msg", message
   end
 

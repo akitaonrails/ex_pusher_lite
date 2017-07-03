@@ -10,10 +10,10 @@ config :ex_pusher_lite,
   ecto_repos: [ExPusherLite.Repo]
 
 # Configures the endpoint
-config :ex_pusher_lite, ExPusherLite.Endpoint,
+config :ex_pusher_lite, ExPusherLite.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "DmSeJwzBQ+RpMjGe4fXZ3BHz/MlUamGsHufEZzVepLpMjAdMywgA6RtE7WoWg7dD",
-  render_errors: [view: ExPusherLite.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: ExPusherLite.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: ExPusherLite.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

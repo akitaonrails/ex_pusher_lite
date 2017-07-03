@@ -1,4 +1,4 @@
-defmodule ExPusherLite.EventsController do
+defmodule ExPusherLite.Web.EventsController do
   use ExPusherLite.Web, :controller
   use Guardian.Phoenix.Controller
 
@@ -12,7 +12,7 @@ defmodule ExPusherLite.EventsController do
       else
         "#{topic}:#{event}"
       end
-    ExPusherLite.Endpoint.broadcast! "#{scope}:#{app_slug}", topic_event, message
+    ExPusherLite.Web.Endpoint.broadcast! "#{scope}:#{app_slug}", topic_event, message
     json conn, %{}
   end
 end

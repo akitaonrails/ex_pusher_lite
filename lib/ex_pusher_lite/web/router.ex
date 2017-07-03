@@ -1,4 +1,4 @@
-defmodule ExPusherLite.Router do
+defmodule ExPusherLite.Web.Router do
   use ExPusherLite.Web, :router
 
   pipeline :browser do
@@ -18,13 +18,13 @@ defmodule ExPusherLite.Router do
     plug Guardian.Plug.LoadResource
   end
 
-  scope "/", ExPusherLite do
+  scope "/", ExPusherLite.Web do
     pipe_through [ :browser, :guardian ]
 
     get "/", PageController, :index
   end
 
-  scope "/api", ExPusherLite do
+  scope "/api", ExPusherLite.Web do
     pipe_through [ :api, :guardian ]
 
     post "/apps/:app_slug/events", EventsController, :create

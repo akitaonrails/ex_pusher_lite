@@ -1,4 +1,4 @@
-defmodule ExPusherLite.App do
+defmodule ExPusherLite.Models.App do
   use ExPusherLite.Web, :model
   alias ExPusherLite.Repo
 
@@ -9,11 +9,11 @@ defmodule ExPusherLite.App do
     field :secret, :string
     field :active, :boolean, default: true
 
-    timestamps
+    timestamps()
   end
 
-  @required_fields ~w(name)
-  @optional_fields ~w()
+  @required_fields [:name]
+  @optional_fields [:slug, :key, :secret, :active]
 
   def get_by_slug(slug) do
     Repo.get_by!(__MODULE__, slug: slug, active: true)
@@ -31,7 +31,8 @@ defmodule ExPusherLite.App do
   """
   def changeset(model, params \\ :empty) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> validate_length(:name, min: 5, max: 255)
     |> unique_constraint(:name)
     |> generate_key

@@ -1,14 +1,14 @@
-defmodule ExPusherLite.AppControllerTest do
-  use ExPusherLite.ConnCase
+defmodule ExPusherLite.Web.AppControllerTest do
+  use ExPusherLite.Web.ConnCase
 
-  alias ExPusherLite.App
+  alias ExPusherLite.Models.App
   @valid_attrs %{ name: "some content" }
   @invalid_attrs %{ name: "abc" }
 
   setup do
     conn = build_conn()
       |> put_req_header("accept", "application/json")
-      |> put_req_header("authorization", "Basic #{ExPusherLite.admin_secret}")
+      |> put_req_header("authorization", "Basic #{ExPusherLite.Application.admin_secret}")
     {:ok, conn: conn}
   end
 
@@ -18,7 +18,7 @@ defmodule ExPusherLite.AppControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    app = create_app
+    app = create_app()
     conn = get conn, app_path(conn, :show, app.slug)
     assert json_response(conn, 200)["data"] == %{"id" => app.id,
       "name" => app.name,
@@ -46,14 +46,14 @@ defmodule ExPusherLite.AppControllerTest do
   end
 
   test "updates and renders chosen resource when data is valid", %{conn: conn} do
-    app = create_app
+    app = create_app()
     conn = put conn, app_path(conn, :update, app.slug), app: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
     assert Repo.get_by(App, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    app = create_app
+    app = create_app()
     conn = put conn, app_path(conn, :update, app.slug), app: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end

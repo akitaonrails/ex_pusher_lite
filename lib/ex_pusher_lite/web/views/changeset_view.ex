@@ -1,4 +1,4 @@
-defmodule ExPusherLite.ChangesetView do
+defmodule ExPusherLite.Web.ChangesetView do
   use ExPusherLite.Web, :view
 
   @doc """

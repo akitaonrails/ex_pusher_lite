@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias ExPusherLite.App
+alias ExPusherLite.Models.App
 alias ExPusherLite.Repo
 
 # not using the App.changeset should just avoid all validations and generations

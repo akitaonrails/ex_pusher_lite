@@ -1,4 +1,4 @@
-defmodule ExPusherLite.ErrorView do
+defmodule ExPusherLite.Web.ErrorView do
   use ExPusherLite.Web, :view
 
   def render("404.html", _assigns) do
