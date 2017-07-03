@@ -1,6 +1,7 @@
 defmodule ExPusherLite.Web.AppControllerTest do
   use ExPusherLite.Web.ConnCase
 
+  alias ExPusherLite.Models
   alias ExPusherLite.Models.App
   @valid_attrs %{ name: "some content" }
   @invalid_attrs %{ name: "abc" }
@@ -67,7 +68,7 @@ defmodule ExPusherLite.Web.AppControllerTest do
   end
 
   defp create_app do
-    changeset = App.changeset(%App{}, @valid_attrs)
-    Repo.insert!(changeset)
+    {:ok, %App{} = app} = Models.create_app(@valid_attrs)
+    app
   end
 end

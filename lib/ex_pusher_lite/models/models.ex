@@ -1,6 +1,6 @@
 defmodule ExPusherLite.Models do
   @moduledoc """
-  The boundary for the Audio system.
+  The boundary for the Models system.
   """
 
   import Ecto.Query, warn: false
@@ -36,6 +36,10 @@ defmodule ExPusherLite.Models do
 
   """
   def get_app!(id), do: Repo.get!(App, id)
+
+  def get_app_by_slug(slug) do
+    Repo.get_by!(App, slug: slug, active: true)
+  end
 
   @doc """
   Creates a app.

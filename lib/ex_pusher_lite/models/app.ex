@@ -15,10 +15,6 @@ defmodule ExPusherLite.Models.App do
   @required_fields [:name]
   @optional_fields [:slug, :key, :secret, :active]
 
-  def get_by_slug(slug) do
-    Repo.get_by!(__MODULE__, slug: slug, active: true)
-  end
-
   def hashed_secret(model) do
     Base.encode64("#{model.key}:#{model.secret}")
   end
